@@ -1,2 +1,2 @@
 # assignment
-This is normal html css website
+This is normal html css Website.
