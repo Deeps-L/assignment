@@ -4,6 +4,7 @@
 
 .container {
 	max-width: 1170px;
+  /* min-height: 100vh; */
 	margin: 0 auto;
 }
 
@@ -21,6 +22,7 @@ h6 {
 p {
 	margin: 0;
 	padding: 0;
+    
 }
 
 ul{
@@ -28,8 +30,17 @@ ul{
 	padding: 0;
 }
 
+.header-item a:hover{
+  color: red !important;
+}
+
+
+
+
+/* header css here */
+
 .intro-section{
-    background-color: #faf8fc;
+    background-color: #ebe9ed;
 }
 .company-name p{
 background-color: #dddcdd;
@@ -94,9 +105,123 @@ background-color: #dddcdd;
 /* home page css */
 
 .thanku-content{
-padding: 9pc 0;
+padding: 102px 0;
 }
 
 .thanku-page{
     background-color: #f1f7f1;
 }
+
+
+/* Custom styles for tabs */
+.nav-tabs {
+  background-color: #dddcdd;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.nav-tabs .nav-link {
+  color: black;
+  background-color: white;
+  border: 1px solid lightgrey;
+  padding: 10px 20px;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
+.nav-tabs .nav-link:hover {
+    color: #007bff !important;
+  }
+
+.nav-tabs .nav-link.active {
+  background-color: #0D6EFD !important;
+  color: #fff !important;
+  border-color: darkgrey;
+}
+
+
+
+
+.tab-content {
+  border: 1px solid lightgrey;
+  padding: 20px;
+  border-top: none;
+}
+.team_tab{
+    border: none !important;   
+}
+
+.nav-tabs {
+    /* --bs-nav-tabs-border-width: var(--bs-border-width); */
+    --bs-nav-tabs-border-color: none !important;
+    --bs-nav-tabs-border-radius: var(--bs-border-radius);
+    --bs-nav-tabs-link-hover-border-color: var(--bs-secondary-bg) var(--bs-secondary-bg) var(--bs-border-color);
+    --bs-nav-tabs-link-active-color: var(--bs-emphasis-color);
+    --bs-nav-tabs-link-active-bg: var(--bs-body-bg);
+    --bs-nav-tabs-link-active-border-color: var(--bs-border-color) var(--bs-border-color) var(--bs-body-bg);
+    border-bottom: var(--bs-nav-tabs-border-width) solid var(--bs-nav-tabs-border-color);
+}
+/* tabs design button */
+
+
+.item-box{
+    background-color: #e2eeff;
+    width: 150px;
+    height: 150px;
+    margin-right: 20px;
+    margin-bottom: 12px;
+    padding: 18px 0;
+     text-align: center;
+    border-radius: 7px;
+   
+}
+.content-item{
+    display: flex;
+    flex-wrap: wrap;
+   align-content: space-between;
+   cursor: pointer;
+  
+}
+.item-box:hover {
+	box-shadow: 3px 2px 12px 4px #b8b3b3;
+}
+.content-item p{
+    font-size: 13px;
+    font-weight: 400;
+}
+.item-box img{
+    height: 60px;
+    width: 60px;
+    border-radius: 50px;
+}
+
+/* another tab box design here */
+
+.quick-links {
+    color: #f8f9fa;
+    transition: color 0.3s ease;
+    text-decoration: none;
+  }
+  
+  .quick-links:hover {
+    color: #007bff !important; 
+    text-decoration: underline;
+    transition: color 0.3s ease;
+  }
+   
+  .footer-contact {
+    color: #f8f9fa;
+    transition: color 0.3s ease;
+  }
+  
+  .footer-contact:hover {
+    color: #007bff; 
+    cursor: pointer;
+  }
+  
+/* Hover effect footer for Quick Links */
+  
+.contact-content{
+  padding: 70px 0;
+}
+

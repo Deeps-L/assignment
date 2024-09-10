@@ -23,7 +23,7 @@
 
         <div class="container">
             <div class="row thanku-content">
-                <div class="col-lg-3 col-md-6 col-sm-10 mx-auto text-center py-lg-2">
+                <div class="col-lg-3 col-md-6 col-sm-10 mx-auto text-center">
 
                     <img src="../images/check.png" class="py-3" alt="check-mark">
                     <h5 class="fw-bold">Thank You !</h5>
@@ -37,23 +37,7 @@
         </div>
     </div>
     <div id="footer"></div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Adjust paths based on your directory structure
-            fetch('../Header/header.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.querySelector('#header').innerHTML = data;
-                });
-
-            fetch('../Footer/footer.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.querySelector('#footer').innerHTML = data;
-                });
-        });
-    </script>
+    <script src="../js/script.js"></script>
 
 </body>
 
