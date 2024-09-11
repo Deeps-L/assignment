@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-  // Fetch the header and footer and inject them into the DOM
+  // Load Header and Footer
   const loadHeaderFooter = () => {
     return Promise.all([
       fetch('../Header/header.html')
@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", function () {
     ]);
   };
 
-  // Once header and footer are loaded, attach event listeners
   loadHeaderFooter().then(() => {
 
     // Email subscription form validation
@@ -47,8 +46,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 3000);
       });
     }
-
-    // Contact form validation
+    
+    // contact form validation code
     const nameInput = document.getElementById('nameInput');
     const emailInput = document.getElementById('emailInput');
     const messageInput = document.getElementById('messageInput');
@@ -57,60 +56,105 @@ document.addEventListener("DOMContentLoaded", function () {
     const messageErr = document.getElementById('messageErr');
     const submitBtn = document.getElementById('submitBtn');
 
-    const validateForm = () => {
-      let isValid = true;
+    if (!nameInput || !emailInput || !messageInput || !submitBtn) {
+      return;
+    }
 
-      if (nameInput.value.trim() === '') {
+    let isNameTouched = false;
+    let isEmailTouched = false;
+    let isMessageTouched = false;
+
+    const validateName = () => {
+      if (nameInput.value.trim() === '' && isNameTouched) {
         nameErr.textContent = 'Please enter your name';
-        isValid = false;
+        return false;
       } else {
         nameErr.textContent = '';
+        return true;
       }
-
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(emailInput.value.trim())) {
-        emailErr.textContent = 'Please enter a valid email address';
-        isValid = false;
-      } else {
-        emailErr.textContent = '';
-      }
-
-      if (messageInput.value.trim() === '') {
-        messageErr.textContent = 'Please enter your message';
-        isValid = false;
-      } else {
-        messageErr.textContent = '';
-      }
-
-      submitBtn.disabled = !isValid;
-      return isValid;
     };
 
-    if (nameInput && emailInput && messageInput && submitBtn) {
-      nameInput.addEventListener('input', validateForm);
-      emailInput.addEventListener('input', validateForm);
-      messageInput.addEventListener('input', validateForm);
+    const validateEmail = () => {
+      const emailValue = emailInput.value.trim();
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;    
 
-      submitBtn.addEventListener('click', (event) => {
-        event.preventDefault();
+      if (emailValue === '' && isEmailTouched) {
+        emailErr.textContent = 'Email cannot be blank';
+        return false;
+      }       
+      if (!emailRegex.test(emailValue) && isEmailTouched && emailValue !== '') {
+        emailErr.textContent = 'Please enter a valid email address';
+        return false;
+      }       
+      emailErr.textContent = '';
+      return true;
+    };
 
-        if (validateForm()) {
-          const formData = {
-            name: nameInput.value,
-            email: emailInput.value,
-            message: messageInput.value
-          };
+    const validateMessage = () => {
+      if (messageInput.value.trim() === '' && isMessageTouched) {
+        messageErr.textContent = 'Please enter your message';
+        return false;
+      } else {
+        messageErr.textContent = '';
+        return true;
+      }
+    };
 
-          console.log('Form data:', formData);
+    const validateForm = () => {
+      const isNameValid = validateName();
+      const isEmailValid = validateEmail();
+      const isMessageValid = validateMessage();
 
-          setTimeout(() => {
-            window.location.href = '../pages/thanku.html';
-          }, 2000);
-        }
-      });
-    }
+      submitBtn.disabled = !(isNameValid && isEmailValid && isMessageValid);
+      return isNameValid && isEmailValid && isMessageValid;
+    };
+
+    // Add event listeners only when inputs exist
+    nameInput.addEventListener('focus', () => { isNameTouched = true; });
+    emailInput.addEventListener('focus', () => { isEmailTouched = true; });
+    messageInput.addEventListener('focus', () => { isMessageTouched = true; });
+
+    nameInput.addEventListener('input', () => {
+      validateName();
+      validateForm(); 
+    });
+
+    emailInput.addEventListener('input', () => {
+      validateEmail();
+      validateForm(); 
+    });
+
+    messageInput.addEventListener('input', () => {
+      validateMessage();
+      validateForm(); 
+    });
+
+    submitBtn.addEventListener('click', (event) => {
+      event.preventDefault();      
+      const isValid = validateForm();
+
+      // If the form is valid and button is enabled, log the form data
+      if (isValid && !submitBtn.disabled) {
+        const formData = {
+          name: nameInput.value,
+          email: emailInput.value,
+          message: messageInput.value
+        };
+
+        console.log('Form data:', formData);
+        
+        setTimeout(() => {
+          window.location.href = '../pages/thanku.html';
+        }, 3000);
+      } else {
+        console.log('Submit button disabled:', submitBtn.disabled);
+        console.log('Form is valid:', isValid);
+        console.log('Form is invalid or button is disabled.');
+      }
+    });
+
   }).catch(err => {
-    console.error('Error loading header/footer:', err);
+    console.error('Error loading header and footer:', err);
   });
 
 });
